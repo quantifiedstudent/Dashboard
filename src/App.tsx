@@ -53,7 +53,7 @@ function App() {
           yAxisID: "y",
         },
         {
-          label: "Dataset 2",
+          label: "Number of Assigments",
           data: [
             0, 0, 0, 1, 2, 0, 1, 3, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0,
             1, 0, 1, 2, 0, 0,
