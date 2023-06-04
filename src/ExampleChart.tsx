@@ -57,12 +57,9 @@ export const options: ChartOptions<"line"> = {
   },
 };
 
-const labels = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30, 31,
-];
+const labels = Array.from(Array(10).keys());
 
-export const data = {
+export const mockData = {
   labels,
   datasets: [
     {
@@ -83,9 +80,9 @@ export const data = {
 };
 
 interface MyLineChartProps {
-  data: ChartData<"line", (number | Point | null)[], unknown>;
+  data: ChartData<"line">;
 }
 
-export const ExampleChart: React.FC<MyLineChartProps> = ({ data }) => {
+export default function ExampleChart({ data }:MyLineChartProps){
   return <Line data={data} options={options} />;
-};
+}
