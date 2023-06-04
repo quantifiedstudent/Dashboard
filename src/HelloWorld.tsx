@@ -1,5 +1,5 @@
 function HelloWorld() {
-  return <h1>Prof of Concept</h1>;
+  return <h1>Proof of Concept</h1>;
 }
 
 export default HelloWorld;

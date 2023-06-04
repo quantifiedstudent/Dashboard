@@ -8,6 +8,8 @@ import {
   Tooltip,
   Legend,
   ChartOptions,
+  ChartData,
+  Point,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -41,7 +43,7 @@ export const options: ChartOptions<"line"> = {
       position: "left",
       title: {
         display: true,
-        text: "Submissions",
+        text: "Temperature",
       },
     },
     y1: {
@@ -80,7 +82,10 @@ export const data = {
   ],
 };
 
-function ExampleChart() {
-  return <Line data={data} options={options} />;
+interface MyLineChartProps {
+  data: ChartData<"line", (number | Point | null)[], unknown>;
 }
-export default ExampleChart;
+
+export const ExampleChart: React.FC<MyLineChartProps> = ({ data }) => {
+  return <Line data={data} options={options} />;
+};
