@@ -4,6 +4,7 @@ import SubmissionWithDate from "./GraphSubmissionsWithWeather";
 import "./App.css";
 import ExampleChart from "./ExampleChart";
 import GetDataButton from "./GetDataButton";
+import TopAppBarComponent from "./TopAppBar";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { ChartData, Point } from "chart.js";
@@ -66,9 +67,10 @@ function App() {
     setChartData(data);
   };
 
-  const [chartData, setChartData] = useState<
-    ChartData<"line">
-  >({ labels: [], datasets: [] });
+  const [chartData, setChartData] = useState<ChartData<"line">>({
+    labels: [],
+    datasets: [],
+  });
 
   useEffect(() => {
     fetchData();
@@ -77,6 +79,7 @@ function App() {
   return (
     <>
       <div>
+        <TopAppBarComponent />
         <h1>Proof of Concept</h1>
         <div className="exampleChart">
           <ExampleChart data={chartData} />
