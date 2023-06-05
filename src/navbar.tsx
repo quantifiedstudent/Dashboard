@@ -24,7 +24,7 @@ export default function Navbar() {
                 <div className="navbar__icons__icon navbar__icons__icon--small"><ChatBubbleIcon fontSize='inherit'/></div>
                 <div className="navbar__icons__icon"><NotificationsActiveIcon fontSize='inherit'/></div>
                 <div className="navbar__icons__icon"><PersonIcon fontSize='inherit'/></div>
-                <div className="navbar__icons__icon"><AccountCircleIcon fontSize='inherit'/></div>
+                {/* <div className="navbar__icons__icon"><AccountCircleIcon fontSize='inherit'/></div> */}
             </div>
         </div>
     )
