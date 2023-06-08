@@ -9,19 +9,20 @@ import SubmissionWithDate from "./GraphSubmissionsWithWeather";
 import ExampleChart from "./ExampleChart";
 import GetDataButton from "./GetDataButton";
 import { ChartData, Point } from "chart.js";
+import CanvasCoursesSubmissionsChart from "./CanvasCoursesSubmissionsChart";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+
   const fetchData = async () => {
     const result = await fetch(
       "http://localhost:7003/graphSubmissionsWithWeather/course/13086?startDate=2022-09-01&endDate=2022-09-30"
     );
-
+  
     const resultJson = await result.json();
     const resultDTO: GraphSubmissionsWithWeatherDTO = resultJson;
-
+  
     const labels = resultDTO.temperature.map((x) => x.date);
-
+  
     // function nrOfSubmissions(
     //   resultDTO: GraphSubmissionsWithWeatherDTO
     // ): number[] {
@@ -42,7 +43,7 @@ function App() {
     //   }
     //   return list;
     // }
-
+  
     const data: ChartData<"line"> = {
       labels,
       datasets: [
@@ -65,7 +66,6 @@ function App() {
         },
       ],
     };
-
     setChartData(data);
   };
 
@@ -74,9 +74,11 @@ function App() {
     datasets: [],
   });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+  
+  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -108,6 +110,7 @@ function App() {
         <div><ExampleChart data={chartData} /></div>
         <div><ExampleChart data={chartData} /></div>
         <div><ExampleChart data={chartData} /></div>
+        <div><CanvasCoursesSubmissionsChart/></div>
         <div style={{ backgroundColor: 'red' }}></div>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
@@ -117,5 +120,3 @@ function App() {
     </>
   )
 }
-
-export default App

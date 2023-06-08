@@ -84,5 +84,5 @@ interface MyLineChartProps {
 }
 
 export default function ExampleChart({ data }:MyLineChartProps){
-  return <Line data={mockData} options={options} />;
+  return <Line data={data} options={options} />;
 }
