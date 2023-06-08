@@ -56,7 +56,7 @@ export default function CanvasCoursesSubmissionsChart() {
 
     const fetchData = async () => {
         const result = await fetch(
-            "http://localhost:7003/graphCanvasCourseSubmissions/course/13086"
+            "http://localhost:7003/graphCanvasOneCourseSubmissions/course/13086"
         );
 
         const resultJson = await result.json();
