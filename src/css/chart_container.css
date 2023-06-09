@@ -3,6 +3,11 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.chart-container:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
+}
+
 .chart-container__buttons{
     position: absolute;
     top: 1rem;
