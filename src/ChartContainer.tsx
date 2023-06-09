@@ -8,7 +8,6 @@ interface ChartContainerProps {
 }
 
 export default function ChartContainer({children}: ChartContainerProps ) {
-
   return (
     <div className="chart-container">
       {children}
