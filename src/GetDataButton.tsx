@@ -1,4 +1,8 @@
-export default function GetDataButton({ onPressFunction }: { onPressFunction: () => Promise<void> }) {
+interface GetDataButtonProps{
+  onPressFunction: () => Promise<void>
+}
+
+export default function GetDataButton({ onPressFunction }: GetDataButtonProps) {
   return (
     <button
       color="success"
