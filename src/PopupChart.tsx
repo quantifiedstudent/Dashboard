@@ -1,23 +1,20 @@
-import React from 'react';
-import './css/popup_chart.css';
-import ChartContainer from './ChartContainer';
+import React from "react";
+import "./css/popup_chart.css";
+import ChartContainer from "./ChartContainer";
 
 interface PopupProps {
-  onClose: () => void;
+  onPressClose: () => void;
   children: React.ReactNode;
 }
 
-const PopupChart: React.FC<PopupProps> = ({ onClose, children }) => {
-    return (
-      <div className="overlay">
-        <div className="overlay__content">
-          <button className="overlay__content__button" onClick={onClose}>
-            Close
-          </button>
-          <ChartContainer>{children}</ChartContainer>
-        </div>
+const PopupChart: React.FC<PopupProps> = ({ onPressClose, children }) => {
+  return (
+    <div className="overlay">
+      <div className="overlay__content">
+        <ChartContainer onPressClose={onPressClose}>{children}</ChartContainer>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 export default PopupChart;

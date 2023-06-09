@@ -15,7 +15,7 @@ export default function ChartContainer({children, onPressClose, onPressOpen, onP
     <div className="chart-container">
       {children}
       <div className="chart-container__buttons">
-        <div className="chart-container__buttons__options"><CloseRoundedIcon/></div>
+        <div className="chart-container__buttons__options" onClick={onPressClose}><CloseRoundedIcon/></div>
         <div className="chart-container__buttons__fullscreen"><OpenInFullRoundedIcon/></div>
         <div className="chart-container__buttons__fullscreen"><MoreHorizRoundedIcon/></div>
       </div>

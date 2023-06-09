@@ -12,6 +12,12 @@ import PopupChart from "./PopupChart";
 export default function App() {  
   const [count, setCount] = useState(0)
 
+  const [showPopup, setShowPopup] = useState(true);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
     <>
       <Navbar />
@@ -48,9 +54,10 @@ export default function App() {
         <div style={{ backgroundColor: 'purple' }}></div>
         <div style={{ backgroundColor: 'yellow' }}></div> */}
       </div>
-      <PopupChart onClose={() => console.log("close")}>
+      {showPopup && (
+      <PopupChart onPressClose={togglePopup}>
         <ExampleChart/>
-      </PopupChart>
+      </PopupChart>)}
     </>
   )
 }
