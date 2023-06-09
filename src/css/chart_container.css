@@ -1,21 +1,21 @@
-.chart-container{
+.charts .chart-container{
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.chart-container:hover{
+.charts .chart-container:hover{
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
 }
 
-.chart-container__buttons{
+.charts .chart-container__buttons{
     position: absolute;
     top: 1rem;
     right: 2rem;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.chart-container__buttons div{
+.charts .chart-container__buttons div{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +26,7 @@
     background-color: #6AABD7;
 }
 
-.chart-container__buttons div:hover{
+.charts .chart-container__buttons div:hover{
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(82, 41, 95, 0.502);
 }

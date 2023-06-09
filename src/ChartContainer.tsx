@@ -5,9 +5,12 @@ import './css/chart_container.css'
 
 interface ChartContainerProps {
   children: React.ReactNode;
+  onPressClose?: () => void;
+  onPressOpen?: () => void;
+  onPressMore?: () => void;
 }
 
-export default function ChartContainer({children}: ChartContainerProps ) {
+export default function ChartContainer({children, onPressClose, onPressOpen, onPressMore}: ChartContainerProps ) {
   return (
     <div className="chart-container">
       {children}

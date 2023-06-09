@@ -7,6 +7,7 @@ import ExampleChart from "./charts/ExampleChart";
 import CanvasOneCourseSubmissionsChart from "./charts/CanvasOneCourseSubmissionsChart";
 import ChartContainer from "./ChartContainer";
 import GradesWeatherChart from "./charts/GradesWeatherChart";
+import PopupChart from "./PopupChart";
 
 export default function App() {  
   const [count, setCount] = useState(0)
@@ -47,6 +48,9 @@ export default function App() {
         <div style={{ backgroundColor: 'purple' }}></div>
         <div style={{ backgroundColor: 'yellow' }}></div> */}
       </div>
+      <PopupChart onClose={() => console.log("close")}>
+        <ExampleChart/>
+      </PopupChart>
     </>
   )
 }
