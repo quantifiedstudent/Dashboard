@@ -10,6 +10,7 @@ import ExampleChart from "./ExampleChart";
 import GetDataButton from "./GetDataButton";
 import { ChartData, Point } from "chart.js";
 import CanvasCoursesSubmissionsChart from "./CanvasCoursesSubmissionsChart";
+import ChartContainer from "./ChartContainer";
 
 export default function App() {
 
@@ -106,12 +107,12 @@ export default function App() {
       </p>
       <div className="charts">
         {/* <ExampleChart data={chartData} /> */}
-        <div><ExampleChart data={chartData} /></div>
-        <div><ExampleChart data={chartData} /></div>
-        <div><ExampleChart data={chartData} /></div>
-        <div><ExampleChart data={chartData} /></div>
-        <div><CanvasCoursesSubmissionsChart/></div>
-        <div style={{ backgroundColor: 'red' }}></div>
+        <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
+        <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
+        <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
+        <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
+        <ChartContainer><CanvasCoursesSubmissionsChart/></ChartContainer>
+        <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
         <div style={{ backgroundColor: 'purple' }}></div>
