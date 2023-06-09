@@ -44,10 +44,10 @@ export default function App() {
       <div className="charts">
         <ChartContainer><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086}/></ChartContainer>
         <ChartContainer><GradesWeatherChart/></ChartContainer>
-        <ChartContainer><ExampleChart/></ChartContainer>
-        <ChartContainer><ExampleChart/></ChartContainer>
-        <ChartContainer><ExampleChart/></ChartContainer>
-        <ChartContainer><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
         {/* <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
