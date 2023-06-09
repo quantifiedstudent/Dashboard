@@ -38,6 +38,19 @@ const mockData: ChartData<"bar"> = {
   ],
 };
 
+const options = (courseName: string) => ({
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: `Canvas Course "${courseName}" Submissions`,
+    },
+  },
+});
+
 interface CanvasOneCourseSubmissionsChartProps {
   data?: ChartData<"bar">;
   courseId: number;
@@ -105,6 +118,7 @@ export default function CanvasOneCourseSubmissionsChart({
   };
 
   const courses: Course[] = useContext(courseContext);
+  const courseName = courses.find((course) => course.id === courseId)?.name;
 
   const [chartData, setChartData] = useState<ChartData<"bar">>({
     labels: [],
@@ -115,20 +129,5 @@ export default function CanvasOneCourseSubmissionsChart({
     fetchData();
   }, []);
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top" as const,
-      },
-      title: {
-        display: true,
-        text: `Canvas Course "${
-          courses.find((course) => course.id == courseId)?.name
-        }" Submissions`,
-      },
-    },
-  };
-
-  return <Bar options={options} data={chartData} />;
+  return <Bar options={options(courseName ? courseName : '')} data={chartData} />;
 }
