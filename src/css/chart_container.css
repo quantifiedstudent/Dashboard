@@ -12,6 +12,7 @@
     position: absolute;
     top: 1rem;
     right: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .chart-container__buttons div{
@@ -23,4 +24,9 @@
     border-radius: 5rem;
     color: #52295F;
     background-color: #6AABD7;
+}
+
+.chart-container__buttons div:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(82, 41, 95, 0.502);
 }
