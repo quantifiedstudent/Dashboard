@@ -3,13 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Navbar from './navbar'
 import './css/app.css'
-import GraphSubmissionsWithWeatherDTO from "./GraphSubmissionsWithWeather";
-import WeatherOfTheDay from "./GraphSubmissionsWithWeather";
-import SubmissionWithDate from "./GraphSubmissionsWithWeather";
-import ExampleChart from "./ExampleChart";
+import GraphSubmissionsWithWeatherDTO from "./models/GraphSubmissionsWithWeather";
+import WeatherOfTheDay from "./models/GraphSubmissionsWithWeather";
+import SubmissionWithDate from "./models/GraphSubmissionsWithWeather";
+import ExampleChart from "./charts/ExampleChart";
 import GetDataButton from "./GetDataButton";
 import { ChartData, Point } from "chart.js";
-import CanvasCoursesSubmissionsChart from "./CanvasCoursesSubmissionsChart";
+import CanvasOneCourseSubmissionsChart from "./charts/CanvasOneCourseSubmissionsChart";
 import ChartContainer from "./ChartContainer";
 
 export default function App() {
@@ -111,7 +111,7 @@ export default function App() {
         <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
         <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
         <ChartContainer><ExampleChart data={chartData} /></ChartContainer>
-        <ChartContainer><CanvasCoursesSubmissionsChart/></ChartContainer>
+        <ChartContainer><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086}/></ChartContainer>
         <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>

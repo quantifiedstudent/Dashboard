@@ -2,7 +2,6 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import './css/chart_container.css'
-import { ReactNode } from 'react';
 
 interface ChartContainerProps {
   children: React.ReactNode;

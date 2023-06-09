@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { ChartData } from 'chart.js';
-import IGraphCanvasCourseSubmissions, { ISubmissionInCourse } from './models/SubmissionInCourse'
+import IGraphCanvasCourseSubmissions, { ISubmissionInCourse } from '../models/SubmissionInCourse'
 
 ChartJS.register(
     CategoryScale,
@@ -21,11 +21,6 @@ ChartJS.register(
     Legend
 );
 
-
-interface MyBarChartProps {
-    data: ChartData<"bar">;
-}
-
 export const options = {
     responsive: true,
     plugins: {
@@ -34,40 +29,40 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Canvas Courses Submissions',
+            text: 'Canvas Course Submissions',
         },
     },
 };
 
-export default function CanvasCoursesSubmissionsChart() {
-    
-    const startDate = new Date('2023-03-01');
-    const endDate = new Date('2023-04-01');
-    
-    const dates: Date[] = [];
-    const labels: string[] = [];
-    
-    let currentDate = startDate;
-    while (currentDate <= endDate) {
-        dates.push(new Date(currentDate));
-        labels.push(currentDate.toISOString().split('T')[0])
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
+interface CanvasOneCourseSubmissionsChartProps {
+    data?: ChartData<"bar">;
+    courseId: number;
+    startDate: Date;
+    endDate: Date;
+}
 
-    const fetchData = async () => {
+export default function CanvasOneCourseSubmissionsChart({data, courseId, startDate, endDate}: CanvasOneCourseSubmissionsChartProps) {
+    const fetchData = async () => {        
+        const dates: Date[] = [];
+        const labels: string[] = [];
+        
+        let currentDate = startDate;
+        while (currentDate <= endDate) {
+            dates.push(new Date(currentDate));
+            labels.push(currentDate.toISOString().split('T')[0])
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+    
         const result = await fetch(
-            "http://localhost:7003/graphCanvasOneCourseSubmissions/course/13086"
+            `http://localhost:7003/graphCanvasOneCourseSubmissions/course/${courseId}`
         );
-
-        const resultJson = await result.json();
-        const submissionsInCourse: ISubmissionInCourse[] = (resultJson as IGraphCanvasCourseSubmissions).canvasSubmissions;
-        console.log(submissionsInCourse)
-
+        const submissionsInCourse: ISubmissionInCourse[] = (await result.json() as IGraphCanvasCourseSubmissions).canvasSubmissions;
+    
         const resultArray: number[] = Array(dates.length).fill(0);
-
+    
         for (const obj of submissionsInCourse) {
             const objDate = new Date(obj.submitted_at); // Convert objDate to Date object
-
+    
             const index = dates.findIndex(date =>
                 date.getFullYear() === objDate.getFullYear() &&
                 date.getMonth() === objDate.getMonth() &&
@@ -78,7 +73,7 @@ export default function CanvasCoursesSubmissionsChart() {
                 resultArray[index]++;
             }
         }
-
+    
         const data: ChartData<"bar"> = {
             labels,
             datasets: [
@@ -93,6 +88,7 @@ export default function CanvasCoursesSubmissionsChart() {
         };
         setChartData(data);
     };
+
     const [chartData, setChartData] = useState<ChartData<"bar">>({
         labels: [],
         datasets: [],
