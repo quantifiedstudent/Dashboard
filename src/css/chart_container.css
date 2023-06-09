@@ -2,3 +2,20 @@
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.chart-container__buttons{
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+}
+
+.chart-container__buttons div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5rem;
+    color: #52295F;
+    background-color: #6AABD7;
+}
