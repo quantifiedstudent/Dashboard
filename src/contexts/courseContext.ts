@@ -2,9 +2,15 @@ import { createContext } from "react";
 import Course from "../models/ICourse";
 
 const fetchData = async () => {
-  const result = await fetch(`http://localhost:7000/course/student/24412`);
-  const courses: Course[] = (await result.json()) as Course[];
-  return courses
+  try{
+    const result = await fetch(`http://localhost:7000/course/student/24412`);
+    const courses: Course[] = (await result.json()) as Course[];
+    return courses
+  }
+  catch(error){
+     console.error(`Cannot fetch courses. Message: ${error}`)
+     return [];
+  }
 };
 
 export const courseContext = createContext(await fetchData());
