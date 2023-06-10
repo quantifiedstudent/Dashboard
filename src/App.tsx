@@ -13,9 +13,16 @@ export default function App() {
   const [count, setCount] = useState(0)
 
   const [showPopup, setShowPopup] = useState(true);
+  const [openedPopupChart, setOpenedPopupChart] = useState<React.ReactNode>(null);
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
+  const disablePopup = () => {
+    setOpenedPopupChart(null);
+    setShowPopup(false);
+  };
+
+  const enablePopup = (element: React.ReactNode) => {
+    setOpenedPopupChart(element);
+    setShowPopup(true);
   };
 
   return (
@@ -42,12 +49,12 @@ export default function App() {
         Click on the Vite and React logos to learn more
       </p>
       <div className="charts">
-        <ChartContainer><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086}/></ChartContainer>
-        <ChartContainer><GradesWeatherChart/></ChartContainer>
-        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={togglePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086}/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><GradesWeatherChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
         {/* <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
@@ -55,8 +62,8 @@ export default function App() {
         <div style={{ backgroundColor: 'yellow' }}></div> */}
       </div>
       {showPopup && (
-      <PopupChart onPressClose={togglePopup}>
-        <ExampleChart/>
+      <PopupChart onPressClose={disablePopup}>
+        {openedPopupChart}
       </PopupChart>)}
     </>
   )

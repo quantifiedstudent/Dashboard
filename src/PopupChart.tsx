@@ -7,7 +7,7 @@ interface PopupProps {
   children: React.ReactNode;
 }
 
-const PopupChart: React.FC<PopupProps> = ({ onPressClose, children }) => {
+export default function PopupChart({ onPressClose, children }:PopupProps){
   return (
     <div className="overlay">
       <div className="overlay__content">
@@ -16,5 +16,3 @@ const PopupChart: React.FC<PopupProps> = ({ onPressClose, children }) => {
     </div>
   );
 };
-
-export default PopupChart;
