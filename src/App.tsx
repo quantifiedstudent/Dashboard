@@ -8,6 +8,7 @@ import CanvasOneCourseSubmissionsChart from "./charts/CanvasOneCourseSubmissions
 import ChartContainer from "./ChartContainer";
 import GradesWeatherChart from "./charts/GradesWeatherChart";
 import PopupChart from "./PopupChart";
+import PopupOptions from "./PopupOptions";
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -65,6 +66,10 @@ export default function App() {
         <PopupChart onPressClose={disablePopup}>
           {openedPopupChart}
         </PopupChart>)}
+      {/* {showPopup && (
+        <PopupOptions onPressClose={disablePopup} openInFull={true}>
+          {openedPopupChart}
+        </PopupOptions>)} */}
     </>
   )
 }
