@@ -11,7 +11,7 @@ export default function PopupChart({ onPressClose, children }:PopupProps){
   return (
     <div className="overlay">
       <div className="overlay__content">
-        <ChartContainer onPressClose={onPressClose}>{children}</ChartContainer>
+        <ChartContainer onPressClose={onPressClose} openInFull={true}>{children}</ChartContainer>
       </div>
     </div>
   );

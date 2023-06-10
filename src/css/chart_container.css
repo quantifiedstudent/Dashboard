@@ -15,18 +15,19 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.charts .chart-container__buttons div{
+.chart-container__buttons div{
+    aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.2rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem;
     border-radius: 5rem;
     color: #52295F;
     background-color: #6AABD7;
 }
 
-.charts .chart-container__buttons div:hover{
+.chart-container__buttons div:hover{
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(82, 41, 95, 0.502);
 }

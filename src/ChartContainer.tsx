@@ -8,9 +8,10 @@ interface ChartContainerProps {
   onPressClose?: () => void;
   onPressOpen?: (element: React.ReactNode) => void;
   onPressMore?: () => void;
+  openInFull?: boolean;
 }
 
-export default function ChartContainer({children, onPressClose, onPressOpen, onPressMore}: ChartContainerProps ) {
+export default function ChartContainer({ children, onPressClose, onPressOpen, onPressMore, openInFull = false }: ChartContainerProps) {
   const handleClick = () => {
     if (onPressOpen) {
       onPressOpen(children);
@@ -20,9 +21,9 @@ export default function ChartContainer({children, onPressClose, onPressOpen, onP
     <div className="chart-container">
       {children}
       <div className="chart-container__buttons">
-        <div className="chart-container__buttons__options" onClick={onPressClose}><CloseRoundedIcon/></div>
-        <div className="chart-container__buttons__fullscreen" onClick={handleClick}><OpenInFullRoundedIcon/></div>
-        <div className="chart-container__buttons__more"><MoreHorizRoundedIcon/></div>
+        {openInFull && (<div className="chart-container__buttons__options" onClick={onPressClose}><CloseRoundedIcon /></div>)}
+        {!openInFull && (<div className="chart-container__buttons__options" onClick={handleClick}><OpenInFullRoundedIcon /></div>)}
+        <div className="chart-container__buttons__more"><MoreHorizRoundedIcon /></div>
       </div>
     </div>
   )
