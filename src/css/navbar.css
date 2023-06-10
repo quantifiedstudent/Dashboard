@@ -2,8 +2,11 @@
     margin: 1.25rem;
     padding: 0 1.5rem;
     box-sizing: border-box;
+    position: sticky;
+    top: 1.25rem;
     display: flex;
     align-items: center;
+    z-index: 100;
     border-radius: 0.5rem;
     justify-content: space-between;
     background-color: #52295f;
