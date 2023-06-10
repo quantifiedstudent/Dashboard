@@ -9,7 +9,7 @@ import ChartContainer from "./ChartContainer";
 import GradesWeatherChart from "./charts/GradesWeatherChart";
 import PopupChart from "./PopupChart";
 
-export default function App() {  
+export default function App() {
   const [count, setCount] = useState(0)
 
   const [showPopup, setShowPopup] = useState(false);
@@ -28,7 +28,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <div>
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -47,14 +47,14 @@ export default function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
       <div className="charts">
-        <ChartContainer onPressOpen={enablePopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086}/></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><GradesWeatherChart/></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart/></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086} /></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><GradesWeatherChart /></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
         {/* <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
@@ -62,9 +62,9 @@ export default function App() {
         <div style={{ backgroundColor: 'yellow' }}></div> */}
       </div>
       {showPopup && (
-      <PopupChart onPressClose={disablePopup}>
-        {openedPopupChart}
-      </PopupChart>)}
+        <PopupChart onPressClose={disablePopup}>
+          {openedPopupChart}
+        </PopupChart>)}
     </>
   )
 }

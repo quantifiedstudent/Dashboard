@@ -30,8 +30,6 @@
     margin: 0 0.25rem;
 }
 
-#navbar__section__title {}
-
 #navbar__icons {
     height: calc(100% - 0.75rem);
     display: flex;
