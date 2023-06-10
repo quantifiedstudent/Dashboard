@@ -1,4 +1,6 @@
 .charts .chart-container{
+    min-height: 20rem;
+    min-width: 30rem;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
 }
