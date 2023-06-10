@@ -12,7 +12,7 @@ import PopupChart from "./PopupChart";
 export default function App() {  
   const [count, setCount] = useState(0)
 
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
   const [openedPopupChart, setOpenedPopupChart] = useState<React.ReactNode>(null);
 
   const disablePopup = () => {
