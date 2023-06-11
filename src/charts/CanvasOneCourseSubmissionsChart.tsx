@@ -12,7 +12,7 @@ import { Bar } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 import IGraphCanvasCourseSubmissions, {
   ISubmissionInCourse,
-} from "../models/SubmissionInCourse";
+} from "../models/ISubmissionInCourse";
 import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
 
