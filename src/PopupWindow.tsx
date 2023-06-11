@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
@@ -12,13 +12,13 @@ interface PopupProps {
   openInFull?: boolean;
 }
 
-export default function PopupOptions({ children, onPressClose, onPressOpen, onPressMore, openInFull = false }:PopupProps){
+export default function PopupWindow({ children, onPressClose, onPressOpen, onPressMore, openInFull = false }: PopupProps) {
   const handleClick = () => {
     if (onPressOpen) {
       onPressOpen(children);
     }
   };
-  
+
   return (
     <div className="overlay">
       <div className="overlay__content">
@@ -27,7 +27,7 @@ export default function PopupOptions({ children, onPressClose, onPressOpen, onPr
           <div className="chart-container__buttons">
             {openInFull && (<div className="chart-container__buttons__options" onClick={onPressClose}><CloseRoundedIcon /></div>)}
             {!openInFull && (<div className="chart-container__buttons__options" onClick={handleClick}><OpenInFullRoundedIcon /></div>)}
-            <div className="chart-container__buttons__more"><MoreHorizRoundedIcon /></div>
+            <div className="chart-container__buttons__more" onClick={onPressMore}><MoreHorizRoundedIcon /></div>
           </div>
         </div>
       </div>
