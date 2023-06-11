@@ -4,3 +4,10 @@
     justify-content: flex-start;
     flex-direction: column;
 }
+
+.tune__window{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}

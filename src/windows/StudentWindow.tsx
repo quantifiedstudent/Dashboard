@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import IStudent from "../models/IStudent";
 import { studentContext } from "../contexts/studentContext";
-import "../css/student_window.css";
+import "../css/windows.css";
 
 interface StudentWindowProps {
   onPressClose?: () => void;

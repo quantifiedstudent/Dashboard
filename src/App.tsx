@@ -8,43 +8,9 @@ import GradesWeatherChart from "./charts/GradesWeatherChart";
 import PopupChart from "./PopupChart";
 import PopupWindow from "./PopupWindow";
 import StudentWindow from "./windows/StudentWindow";
-import Colours from "./Colours";
+import TuneWindow from "./windows/TuneWIndow";
 
 export default function App() {
-
-  const [colourSet, setColourSet] = useState('dark');
-
-  const toggleDarkMode = () => {
-    let newColourSet:string;
-    colourSet == 'dark' ? newColourSet = 'light' : newColourSet = 'dark';
-    colourSet == 'dark' ? setColourSet('light') : setColourSet('dark');
-    switch (newColourSet) {
-      case "dark":
-        document.documentElement.style.setProperty('--main1', Colours.main1Dark);
-        document.documentElement.style.setProperty('--main2', Colours.main2Dark);
-        document.documentElement.style.setProperty('--background', Colours.backgroundDark);
-        document.documentElement.style.setProperty('--font-colour', Colours.fontColourDark);
-        break;
-      case "light":
-        document.documentElement.style.setProperty('--main1', Colours.main1Light);
-        document.documentElement.style.setProperty('--main2', Colours.main2Light);
-        document.documentElement.style.setProperty('--background', Colours.backgroundLight);
-        document.documentElement.style.setProperty('--font-colour', Colours.fontColourLight);
-        break;
-      case "user":
-        document.documentElement.style.setProperty('--main1', "#232323");
-        document.documentElement.style.setProperty('--main2', "#efefef");
-        document.documentElement.style.setProperty('--background', "#101010");
-        document.documentElement.style.setProperty('--font-colour', "#efefef");
-        break;
-      default:
-        document.documentElement.style.setProperty('--main1', Colours.main1Dark);
-        document.documentElement.style.setProperty('--main2', Colours.main2Dark);
-        document.documentElement.style.setProperty('--background', Colours.backgroundDark);
-        document.documentElement.style.setProperty('--font-colour', Colours.fontColourDark);
-        break;
-    }
-  };
 
   // Chart popups system
   const [showChartPopup, setShowChartPopup] = useState(false);
@@ -72,7 +38,7 @@ export default function App() {
   const enableWindowPopup = (element: string) => {
     switch (element) {
       case "tune":
-        setOpenedPopupWindow(<div></div>);
+        setOpenedPopupWindow(<TuneWindow/>);
         setShowWindowPopup(true);
         break;
       case "peers":
@@ -118,7 +84,6 @@ export default function App() {
         <PopupWindow onPressClose={disableWindowPopup} openInFull={true}>
           {openedPopupWindow}
         </PopupWindow>)}
-        <button onClick={toggleDarkMode}>switch theme</button>
     </>
   )
 }
