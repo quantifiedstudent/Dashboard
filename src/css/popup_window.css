@@ -15,7 +15,7 @@
     padding: 5rem 2rem;
     position: relative;
     border-radius: 5rem;
-    background-color: #eeeeee;
+    background-color: var(--main1);
 }
 
 .overlay__content .chart-container {

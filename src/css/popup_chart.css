@@ -17,7 +17,7 @@
     padding: 2rem;
     position: relative;
     border-radius: 5rem;
-    background-color: #eeeeee;
+    background-color: var(--main1);
 }
 
 .popupchart-overlay__content .chart-container {
