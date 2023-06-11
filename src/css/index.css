@@ -5,6 +5,9 @@
   --main1: #52295f;
   --main2: #6AABD7;
   --background: #0B1354;
+  --font-colour: #efefef;
+
+  color: var(--font-colour);
 }
 
 *{
@@ -23,7 +26,8 @@ html, body {
     --main1: #F765A3;
     --main2: #FFA4B6;
     --background: #f9d1d1;
+    --font-colour: #efefef;
 
-    color: #efefef;
+    color: var(--font-colour);
   }
 }
