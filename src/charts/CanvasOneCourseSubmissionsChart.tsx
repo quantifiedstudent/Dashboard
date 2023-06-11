@@ -15,6 +15,7 @@ import IGraphCanvasCourseSubmissions, {
 } from "../models/ISubmissionInCourse";
 import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
+import Select, { ActionMeta, SingleValue } from 'react-select';
 
 ChartJS.register(
   CategoryScale,
@@ -64,6 +65,18 @@ export default function CanvasOneCourseSubmissionsChart({
   startDate,
   endDate,
 }: CanvasOneCourseSubmissionsChartProps) {
+  const courses: Course[] = useContext(courseContext);
+
+  const [chartData, setChartData] = useState<ChartData<"bar">>({
+    labels: [],
+    datasets: [],
+  });
+  const [selectedCourse, setSelectedCourse] = useState(courses[0]);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedCourse]);
+
   //   async function fetchData(){
   const fetchData = async () => {
     const dates: Date[] = [];
@@ -77,11 +90,11 @@ export default function CanvasOneCourseSubmissionsChart({
     }
 
     const result = await fetch(
-      `http://localhost:7003/graphCanvasOneCourseSubmissions/course/${courseId}`
+      `http://localhost:7003/graphCanvasOneCourseSubmissions/course/${selectedCourse.id}`
     );
     const resultJson = await result.json();
     const submissionsInCourse: ISubmissionInCourse[] = (
-        resultJson as IGraphCanvasCourseSubmissions
+      resultJson as IGraphCanvasCourseSubmissions
     ).canvasSubmissions;
 
     const resultArray: number[] = Array(dates.length).fill(0);
@@ -117,17 +130,48 @@ export default function CanvasOneCourseSubmissionsChart({
     setChartData(data);
   };
 
-  const courses: Course[] = useContext(courseContext);
-  const courseName = courses.find((course) => course.id === courseId)?.name;
+  const courseName = selectedCourse.name;
 
-  const [chartData, setChartData] = useState<ChartData<"bar">>({
-    labels: [],
-    datasets: [],
-  });
+  const handleSelectChange = (newSelectedCourse: SingleValue<Course>, actionMeta: ActionMeta<Course>) => {
+    setSelectedCourse(newSelectedCourse as Course);
+  };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      backgroundColor: 'var(--main1)',
+      border: '1px solid var(--main2)',
+      color: 'var(--font-colour)',
+    }),
+    option: (provided: any) => ({
+      ...provided,
+      backgroundColor: 'var(--main1)',
+      color: 'var(--font-colour)',
+    }),
+    singleValue: (provided: any) => ({
+      ...provided,
+      backgroundColor: 'var(--main1)',
+      color: 'var(--font-colour)',
+    }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      backgroundColor: 'var(--main1)',
+      color: 'var(--font-colour)',
+    }),
+  };
 
-  return <Bar options={options(courseName ? courseName : '')} data={chartData} />;
+  return (
+    <div className="chart">
+      <Select
+        options={courses}
+        defaultValue={selectedCourse}
+        getOptionValue={(option) => `${option.id}`}
+        getOptionLabel={(option) => `${option.name}`}
+        onChange={handleSelectChange}
+        className="chart__select"
+        styles={customStyles}
+      />
+      <Bar options={options(courseName ? courseName : '')} data={chartData} />
+    </div>
+  );
 }

@@ -35,3 +35,13 @@
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(82, 41, 95, 0.502);
 }
+.chart{
+    height: calc(100% - 2rem);
+    width: 100%;
+}
+
+.chart .chart__select{
+    height: 2rem;
+    width: 80%;
+    background-color: var(--main1);
+}
