@@ -1,4 +1,4 @@
-export default interface Student {
+export default interface IStudent {
   id: number;
   name: string;
   created_at: string;
