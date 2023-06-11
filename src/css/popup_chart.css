@@ -1,4 +1,4 @@
-.overlay {
+.popupchart-overlay {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -10,7 +10,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.overlay__content {
+.popupchart-overlay__content {
     box-sizing: border-box;
     width: 75%;
     height: 75%;
@@ -20,12 +20,12 @@
     background-color: #eeeeee;
 }
 
-.overlay__content .chart-container {
+.popupchart-overlay__content .chart-container {
     width: 100%;
     height: 100%;
 }
 
-.overlay__content .chart-container__buttons{
+.popupchart-overlay__content .chart-container__buttons{
     position: absolute;
     top: 2.5rem;
     right: 4rem;

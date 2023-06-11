@@ -9,8 +9,8 @@ interface PopupProps {
 
 export default function PopupChart({ onPressClose, children }:PopupProps){
   return (
-    <div className="overlay">
-      <div className="overlay__content">
+    <div className="popupchart-overlay">
+      <div className="popupchart-overlay__content">
         <ChartContainer onPressClose={onPressClose} openInFull={true}>{children}</ChartContainer>
       </div>
     </div>
