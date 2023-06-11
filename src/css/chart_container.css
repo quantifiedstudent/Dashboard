@@ -2,6 +2,8 @@
     min-height: 20rem;
     min-width: 30rem;
     position: relative;
+    background-color: var(--main1);
+    border-radius: 0.5rem;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -25,8 +27,8 @@
     padding: 0.2rem;
     margin: 0.5rem;
     border-radius: 5rem;
-    color: #52295F;
-    background-color: #6AABD7;
+    color: var(--main1);
+    background-color: var(--main2);
 }
 
 .chart-container__buttons div:hover{
