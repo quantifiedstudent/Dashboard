@@ -32,10 +32,10 @@ export default function App() {
         document.documentElement.style.setProperty('--font-colour', Colours.fontColourLight);
         break;
       case "user":
-        document.documentElement.style.setProperty('--main1', Colours.main1Dark);
-        document.documentElement.style.setProperty('--main2', Colours.main2Dark);
-        document.documentElement.style.setProperty('--background', Colours.backgroundDark);
-        document.documentElement.style.setProperty('--font-colour', Colours.fontColourDark);
+        document.documentElement.style.setProperty('--main1', "#232323");
+        document.documentElement.style.setProperty('--main2', "#efefef");
+        document.documentElement.style.setProperty('--background', "#101010");
+        document.documentElement.style.setProperty('--font-colour', "#efefef");
         break;
       default:
         document.documentElement.style.setProperty('--main1', Colours.main1Dark);
