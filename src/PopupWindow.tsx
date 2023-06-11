@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
-import "./css/popup_chart.css";
+import "./css/popup_window.css";
 
 interface PopupProps {
   children: React.ReactNode;
@@ -22,14 +22,12 @@ export default function PopupWindow({ children, onPressClose, onPressOpen, onPre
   return (
     <div className="overlay">
       <div className="overlay__content">
-        <div className="chart-container">
           {children}
           <div className="chart-container__buttons">
             {openInFull && (<div className="chart-container__buttons__options" onClick={onPressClose}><CloseRoundedIcon /></div>)}
             {!openInFull && (<div className="chart-container__buttons__options" onClick={handleClick}><OpenInFullRoundedIcon /></div>)}
-            <div className="chart-container__buttons__more" onClick={onPressMore}><MoreHorizRoundedIcon /></div>
+            {onPressMore && (<div className="chart-container__buttons__more" onClick={onPressMore}><MoreHorizRoundedIcon /></div>)}
           </div>
-        </div>
       </div>
     </div>
   );
