@@ -5,8 +5,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import './css/navbar.css'
 
-export default function Navbar() {
+interface NavbarProps {
+    onPressClose?: () => void;
+    onPressOpen: (element: string) => void;
+    onPressMore?: () => void;
+    openInFull?: boolean;
+  }
 
+export default function Navbar({onPressClose, onPressOpen, onPressMore, openInFull = false }: NavbarProps) {
     return (
         <div id="navbar">
             <div id="navbar__section">
@@ -20,10 +26,10 @@ export default function Navbar() {
                 </div>
             </div>
             <div id="navbar__icons">
-                <div className="navbar__icons__icon"><TuneIcon fontSize='inherit'/></div>
-                <div className="navbar__icons__icon navbar__icons__icon--small"><ChatBubbleIcon fontSize='inherit'/></div>
-                <div className="navbar__icons__icon"><NotificationsActiveIcon fontSize='inherit'/></div>
-                <div className="navbar__icons__icon"><PersonIcon fontSize='inherit'/></div>
+                <div className="navbar__icons__icon" onClick={() => onPressOpen('tune')}><TuneIcon fontSize='inherit'/></div>
+                <div className="navbar__icons__icon navbar__icons__icon--small" onClick={() => onPressOpen('peers')}><ChatBubbleIcon fontSize='inherit'/></div>
+                <div className="navbar__icons__icon" onClick={() => onPressOpen('notifications')}><NotificationsActiveIcon fontSize='inherit'/></div>
+                <div className="navbar__icons__icon" onClick={() => onPressOpen('student')}><PersonIcon fontSize='inherit'/></div>
                 {/* <div className="navbar__icons__icon"><AccountCircleIcon fontSize='inherit'/></div> */}
             </div>
         </div>

@@ -8,68 +8,83 @@ import CanvasOneCourseSubmissionsChart from "./charts/CanvasOneCourseSubmissions
 import ChartContainer from "./ChartContainer";
 import GradesWeatherChart from "./charts/GradesWeatherChart";
 import PopupChart from "./PopupChart";
-import PopupOptions from "./PopupOptions";
+import PopupWindow from "./PopupWindow";
+import StudentWindow from "./windows/StudentWindow";
 
 export default function App() {
-  const [count, setCount] = useState(0)
 
-  const [showPopup, setShowPopup] = useState(false);
+  // Chart popups system
+  const [showChartPopup, setShowChartPopup] = useState(false);
   const [openedPopupChart, setOpenedPopupChart] = useState<React.ReactNode>(null);
 
-  const disablePopup = () => {
+  const disableChartPopup = () => {
     setOpenedPopupChart(null);
-    setShowPopup(false);
+    setShowChartPopup(false);
   };
 
-  const enablePopup = (element: React.ReactNode) => {
+  const enableChartPopup = (element: React.ReactNode) => {
     setOpenedPopupChart(element);
-    setShowPopup(true);
+    setShowChartPopup(true);
+  };
+
+  // Window popups system
+  const [showWindowPopup, setShowWindowPopup] = useState(false);
+  const [openedPopupWindow, setOpenedPopupWindow] = useState<React.ReactNode>(null);
+
+  const disableWindowPopup = () => {
+    setOpenedPopupWindow(null);
+    setShowWindowPopup(false);
+  };
+
+  const enableWindowPopup = (element: string) => {
+    switch (element) {
+      case "tune":
+        setOpenedPopupWindow(<div></div>);
+        setShowWindowPopup(true);
+        break;
+      case "peers":
+        setOpenedPopupWindow(<div></div>);
+        setShowWindowPopup(true);
+        break;
+      case "notifications":
+        setOpenedPopupWindow(<div></div>);
+        setShowWindowPopup(true);
+        break;
+      case "student":
+        setOpenedPopupWindow(<StudentWindow/>);
+        setShowWindowPopup(true);
+        break;
+      default:
+        setOpenedPopupWindow(null);
+        setShowWindowPopup(false);
+        break;
+    }
   };
 
   return (
     <>
-      <Navbar />
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
+      <Navbar onPressOpen={enableWindowPopup} />
       <div className="charts">
-        <ChartContainer onPressOpen={enablePopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086} /></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><GradesWeatherChart /></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
-        <ChartContainer onPressOpen={enablePopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} courseId={13086} /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><GradesWeatherChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
         {/* <ChartContainer><div style={{ backgroundColor: 'red' }}></div></ChartContainer>
         <div style={{ backgroundColor: 'green' }}></div>
         <div style={{ backgroundColor: 'white' }}></div>
         <div style={{ backgroundColor: 'purple' }}></div>
         <div style={{ backgroundColor: 'yellow' }}></div> */}
       </div>
-      {showPopup && (
-        <PopupChart onPressClose={disablePopup}>
+      {showChartPopup && (
+        <PopupChart onPressClose={disableChartPopup}>
           {openedPopupChart}
         </PopupChart>)}
-      {/* {showPopup && (
-        <PopupOptions onPressClose={disablePopup} openInFull={true}>
-          {openedPopupChart}
-        </PopupOptions>)} */}
+      {showWindowPopup && (
+        <PopupWindow onPressClose={disableWindowPopup} openInFull={true}>
+          {openedPopupWindow}
+        </PopupWindow>)}
     </>
   )
 }
