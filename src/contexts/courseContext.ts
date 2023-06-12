@@ -1,11 +1,12 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import Course from "../models/ICourse";
+import { studentContext } from "./studentContext";
 
 const fetchData = async () => {
   try {
-    const result = await fetch(`http://localhost:7000/course/student/26942`);
+    const studentId = + await (await fetch(`http://localhost:7000/student/selfId`)).json();
+    const result = await fetch(`http://localhost:7000/course/student/${studentId}`);
     const courses: Course[] = (await result.json()) as Course[];
-    console.log(courses)
     return courses
   }
   catch (error) {
