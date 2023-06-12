@@ -85,17 +85,16 @@ interface MyLineChartProps {
 }
 
 export default function GradesWeatherChart({ data }: MyLineChartProps) {
-  
   const fetchData = async () => {
     const result = await fetch(
-      "http://localhost:7003/graphSubmissionsWithWeather/course/13086?startDate=2022-09-01&endDate=2022-09-30"
+      "http://localhost:7003/graphSubmissionsWithWeather/course/13094?startDate=2023-05-01&endDate=2023-05-30"
     );
-  
+
     const resultJson = await result.json();
     const resultDTO: GraphSubmissionsWithWeatherDTO = resultJson;
-  
+
     const labels = resultDTO.temperature.map((x) => x.date);
-  
+
     // function nrOfSubmissions(
     //   resultDTO: GraphSubmissionsWithWeatherDTO
     // ): number[] {
@@ -116,7 +115,7 @@ export default function GradesWeatherChart({ data }: MyLineChartProps) {
     //   }
     //   return list;
     // }
-  
+
     const data: ChartData<"line"> = {
       labels,
       datasets: [
@@ -128,11 +127,8 @@ export default function GradesWeatherChart({ data }: MyLineChartProps) {
           yAxisID: "y",
         },
         {
-          label: "Number of Assigments",
-          data: [
-            0, 0, 0, 1, 2, 0, 1, 3, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0,
-            1, 0, 1, 2, 0, 0,
-          ],
+          label: "Score",
+          data: resultDTO.submissions.map((x) => x.score),
           borderColor: "rgb(53, 162, 235)",
           backgroundColor: "rgba(53, 162, 235, 0.5)",
           yAxisID: "y1",

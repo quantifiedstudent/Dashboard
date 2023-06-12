@@ -15,7 +15,7 @@ import IGraphCanvasCourseSubmissions, {
 } from "../models/ISubmissionInCourse";
 import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
-import Select, { ActionMeta, SingleValue } from 'react-select';
+import Select, { ActionMeta, SingleValue } from "react-select";
 
 ChartJS.register(
   CategoryScale,
@@ -126,37 +126,40 @@ export default function CanvasOneCourseSubmissionsChart({
         },
       ],
     };
-    console.log(startDate, endDate)
+    console.log(startDate, endDate);
     setChartData(data);
   };
 
   const courseName = selectedCourse.name;
 
-  const handleSelectChange = (newSelectedCourse: SingleValue<Course>, actionMeta: ActionMeta<Course>) => {
+  const handleSelectChange = (
+    newSelectedCourse: SingleValue<Course>,
+    actionMeta: ActionMeta<Course>
+  ) => {
     setSelectedCourse(newSelectedCourse as Course);
   };
 
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
-      backgroundColor: 'var(--main1)',
-      border: '1px solid var(--main2)',
-      color: 'var(--font-colour)',
+      backgroundColor: "var(--main1)",
+      border: "1px solid var(--main2)",
+      color: "var(--font-colour)",
     }),
     option: (provided: any) => ({
       ...provided,
-      backgroundColor: 'var(--main1)',
-      color: 'var(--font-colour)',
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
     }),
     singleValue: (provided: any) => ({
       ...provided,
-      backgroundColor: 'var(--main1)',
-      color: 'var(--font-colour)',
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
     }),
     indicatorSeparator: (provided: any) => ({
       ...provided,
-      backgroundColor: 'var(--main1)',
-      color: 'var(--font-colour)',
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
     }),
   };
 
@@ -171,7 +174,7 @@ export default function CanvasOneCourseSubmissionsChart({
         className="chart__select"
         styles={customStyles}
       />
-      <Bar options={options(courseName ? courseName : '')} data={chartData} />
+      <Bar options={options(courseName ? courseName : "")} data={chartData} />
     </div>
   );
 }
