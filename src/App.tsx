@@ -8,7 +8,7 @@ import GradesWeatherChart from "./charts/GradesWeatherChart";
 import PopupChart from "./PopupChart";
 import PopupWindow from "./PopupWindow";
 import StudentWindow from "./windows/StudentWindow";
-import TuneWindow from "./windows/TuneWIndow";
+import TuneWindow from "./windows/TuneWindow";
 
 export default function App() {
 
