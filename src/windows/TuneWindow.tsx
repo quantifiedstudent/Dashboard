@@ -2,14 +2,35 @@ import { useState } from "react";
 import BrightnessHighRoundedIcon from '@mui/icons-material/BrightnessHighRounded';
 import Brightness2RoundedIcon from '@mui/icons-material/Brightness2Rounded';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { ColorResult, ChromePicker } from "react-color";
 import Colours from "../css/Colours";
 
-export default function TuneWindow() {
-    const [colourSet, setColourSet] = useState('dark');
+type ColourPaletteTypes = "main1"|"main2"|"background"|"fontColour";
 
-    const toggleDarkMode = (colourPallete: string) => {
-        setColourSet(colourPallete);
-        switch (colourPallete) {
+class UserColours {
+    public "main1": string = "#232323";
+    public "main2": string = "#efefef";
+    public "background": string = "#101010";
+    public "fontColour": string = "#efefef";
+
+    // constructor(main1: string, main2: string, background: string, fontColour: string){
+    //     this.main1 = main1;
+    //     this.main2 = main2;
+    //     this.background = background;
+    //     this.fontColour = fontColour;
+    // }
+}
+
+export default function TuneWindow() {
+    const [colourPalette, setColourPalette] = useState('dark');
+    const [userColours, setUserColours] = useState(new UserColours());
+    const [showColourPicker, setShowColourPicker] = useState(false);
+    const [colourToChange, setColourToChange] = useState<ColourPaletteTypes>("main1");
+
+    const toggleDarkMode = (newColourPalette: string) => {
+        setColourPalette(newColourPalette);
+        switch (newColourPalette) {
             case "dark":
                 document.documentElement.style.setProperty('--main1', Colours.main1Dark);
                 document.documentElement.style.setProperty('--main2', Colours.main2Dark);
@@ -23,10 +44,10 @@ export default function TuneWindow() {
                 document.documentElement.style.setProperty('--font-colour', Colours.fontColourLight);
                 break;
             case "user":
-                document.documentElement.style.setProperty('--main1', "#232323");
-                document.documentElement.style.setProperty('--main2', "#efefef");
-                document.documentElement.style.setProperty('--background', "#101010");
-                document.documentElement.style.setProperty('--font-colour', "#efefef");
+                document.documentElement.style.setProperty('--main1', userColours.main1);
+                document.documentElement.style.setProperty('--main2', userColours.main2);
+                document.documentElement.style.setProperty('--background', userColours.background);
+                document.documentElement.style.setProperty('--font-colour', userColours.fontColour);
                 break;
             default:
                 document.documentElement.style.setProperty('--main1', Colours.main1Dark);
@@ -37,17 +58,51 @@ export default function TuneWindow() {
         }
     };
 
+    const enableColourPicker = (colour: ColourPaletteTypes) => {
+        if (colourPalette == 'user') {
+            setShowColourPicker(true);
+            setColourToChange(colour)
+        }
+    };
+
+    function ColourPicker({ colourToChange }: { colourToChange: ColourPaletteTypes }) {
+        const changeUserColour = (newColour: ColorResult) => {
+            const newUserColours = structuredClone(userColours);
+
+            newUserColours[colourToChange] = newColour.hex;
+            
+            setUserColours(newUserColours);
+            toggleDarkMode(colourPalette);
+        };
+
+        return (
+            <div className="colour-picker">
+                <div className="colour-picker__close" onClick={() => { setShowColourPicker(false) }}><CloseRoundedIcon /></div>
+                <ChromePicker color={userColours[colourToChange]} onChangeComplete={changeUserColour} disableAlpha={true}/>
+            </div>
+        )
+    }
+
     return (
         <div className="tune__window">
-            <div onClick={() => toggleDarkMode('dark')} className="navbar__icons__icon">
-                <Brightness2RoundedIcon fontSize='inherit'/>
+            <div className="theme-picker">
+                <div onClick={() => toggleDarkMode('dark')} className="navbar__icons__icon">
+                    <Brightness2RoundedIcon fontSize='inherit' />
+                </div>
+                <div onClick={() => toggleDarkMode('light')} className="navbar__icons__icon">
+                    <BrightnessHighRoundedIcon fontSize='inherit' />
+                </div>
+                <div onClick={() => toggleDarkMode('user')} className="navbar__icons__icon">
+                    <PaletteRoundedIcon fontSize='inherit' />
+                </div>
             </div>
-            <div onClick={() => toggleDarkMode('light')} className="navbar__icons__icon">
-                <BrightnessHighRoundedIcon fontSize='inherit'/>
+            <div className="user-colours">
+                <div className="colours">Set main1 <div className="user-colours__main1" onClick={() => enableColourPicker("main1")} /></div>
+                <div className="colours">Set main2 <div className="user-colours__main2" onClick={() => enableColourPicker("main2")} /></div>
+                <div className="colours">Set background <div className="user-colours__background" onClick={() => enableColourPicker("background")} /></div>
+                <div className="colours">Set font-colour <div className="user-colours__font-colour" onClick={() => enableColourPicker("fontColour")} /></div>
             </div>
-            <div onClick={() => toggleDarkMode('user')} className="navbar__icons__icon">
-                <PaletteRoundedIcon fontSize='inherit'/>
-            </div>
+            {showColourPicker && <ColourPicker colourToChange={colourToChange} />}
         </div>
     );
 }

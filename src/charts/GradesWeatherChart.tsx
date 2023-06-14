@@ -87,7 +87,7 @@ interface MyLineChartProps {
 export default function GradesWeatherChart({ data }: MyLineChartProps) {
   const fetchData = async () => {
     const result = await fetch(
-      "http://localhost:7003/graphSubmissionsWithWeather/course/13094?startDate=2023-05-01&endDate=2023-05-30"
+      "http://localhost:7003/graphSubmissionsWithWeather/course/13086?startDate=2023-05-01&endDate=2023-05-30"
     );
 
     const resultJson = await result.json();
