@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BrightnessHighRoundedIcon from '@mui/icons-material/BrightnessHighRounded';
 import Brightness2RoundedIcon from '@mui/icons-material/Brightness2Rounded';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
@@ -27,6 +27,11 @@ export default function TuneWindow() {
     const [userColours, setUserColours] = useState(new UserColours());
     const [showColourPicker, setShowColourPicker] = useState(false);
     const [colourToChange, setColourToChange] = useState<ColourPaletteTypes>("main1");
+
+    
+    useEffect(() => {
+        toggleDarkMode(colourPalette);
+    }, [userColours]);
 
     const toggleDarkMode = (newColourPalette: string) => {
         setColourPalette(newColourPalette);
@@ -59,20 +64,15 @@ export default function TuneWindow() {
     };
 
     const enableColourPicker = (colour: ColourPaletteTypes) => {
-        if (colourPalette == 'user') {
             setShowColourPicker(true);
             setColourToChange(colour)
-        }
     };
 
     function ColourPicker({ colourToChange }: { colourToChange: ColourPaletteTypes }) {
         const changeUserColour = (newColour: ColorResult) => {
             const newUserColours = structuredClone(userColours);
-
             newUserColours[colourToChange] = newColour.hex;
-            
             setUserColours(newUserColours);
-            toggleDarkMode(colourPalette);
         };
 
         return (
@@ -97,10 +97,10 @@ export default function TuneWindow() {
                 </div>
             </div>
             <div className="user-colours">
-                <div className="colours">Set main1 <div className="user-colours__main1" onClick={() => enableColourPicker("main1")} /></div>
-                <div className="colours">Set main2 <div className="user-colours__main2" onClick={() => enableColourPicker("main2")} /></div>
-                <div className="colours">Set background <div className="user-colours__background" onClick={() => enableColourPicker("background")} /></div>
-                <div className="colours">Set font-colour <div className="user-colours__font-colour" onClick={() => enableColourPicker("fontColour")} /></div>
+                <div className="colours">Set main1 <div style={{background: userColours["main1"]}} onClick={() => enableColourPicker("main1")} /></div>
+                <div className="colours">Set main2 <div  style={{background: userColours["main2"]}} onClick={() => enableColourPicker("main2")} /></div>
+                <div className="colours">Set background <div  style={{background: userColours["background"]}} onClick={() => enableColourPicker("background")} /></div>
+                <div className="colours">Set font-colour <div  style={{background: userColours["fontColour"]}} onClick={() => enableColourPicker("fontColour")} /></div>
             </div>
             {showColourPicker && <ColourPicker colourToChange={colourToChange} />}
         </div>
