@@ -130,7 +130,7 @@ export default function CanvasOneCourseSubmissionsChart({
     setChartData(data);
   };
 
-  const courseName = selectedCourse.name;
+  const courseName = selectedCourse ? selectedCourse.name : "";
 
   const handleSelectChange = (
     newSelectedCourse: SingleValue<Course>,
