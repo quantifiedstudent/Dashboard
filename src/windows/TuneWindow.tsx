@@ -77,8 +77,8 @@ export default function TuneWindow() {
 
         return (
             <div className="colour-picker">
-                <div className="colour-picker__close" onClick={() => { setShowColourPicker(false) }}><CloseRoundedIcon /></div>
                 <ChromePicker color={userColours[colourToChange]} onChangeComplete={changeUserColour} disableAlpha={true}/>
+                <div className="colour-picker__close" onClick={() => { setShowColourPicker(false) }}><CloseRoundedIcon /></div>
             </div>
         )
     }
