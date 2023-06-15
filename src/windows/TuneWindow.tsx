@@ -9,7 +9,7 @@ import Cookies from "universal-cookie";
 
 type ColourPaletteTypes = "main1"|"main2"|"background"|"fontColour";
 
-class UserColourPalette {
+export class UserColourPalette {
     public "main1": string = "#232323";
     public "main2": string = "#efefef";
     public "background": string = "#101010";

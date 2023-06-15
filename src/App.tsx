@@ -9,8 +9,10 @@ import PopupChart from "./PopupChart";
 import PopupWindow from "./PopupWindow";
 import StudentWindow from "./windows/StudentWindow";
 import TuneWindow from "./windows/TuneWindow";
+import ThemeHelper from "./ThemeHelper";
 
 export default function App() {
+  ThemeHelper();
 
   // Chart popups system
   const [showChartPopup, setShowChartPopup] = useState(false);
