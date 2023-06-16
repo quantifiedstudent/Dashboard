@@ -11,9 +11,9 @@ type ColourPaletteTypes = "main1"|"main2"|"background"|"fontColour";
 
 export class UserColourPalette {
     public "main1": string = "#232323";
-    public "main2": string = "#efefef";
+    public "main2": string = "#F2F2F2";
     public "background": string = "#101010";
-    public "fontColour": string = "#efefef";
+    public "fontColour": string = "#F2F2F2";
 
     // constructor(main1: string, main2: string, background: string, fontColour: string){
     //     this.main1 = main1;

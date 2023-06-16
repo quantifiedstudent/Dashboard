@@ -2,10 +2,10 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: dark light;
 
-  --main1: #52295f;
+  --main1: #663366;
   --main2: #6AABD7;
   --background: #0B1354;
-  --font-colour: #efefef;
+  --font-colour: #F2F2F2;
 
   color: var(--font-colour);
 }
@@ -26,7 +26,7 @@ html, body {
     --main1: #F765A3;
     --main2: #FFA4B6;
     --background: #f9d1d1;
-    --font-colour: #efefef;
+    --font-colour: #F2F2F2;
 
     color: var(--font-colour);
   }
