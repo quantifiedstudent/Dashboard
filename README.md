@@ -1,2 +1,2 @@
 # Dashboard
-More information in the 'QS - Dashboard Report.docx'
+More information in the `QS - Dashboard Report.docx`
