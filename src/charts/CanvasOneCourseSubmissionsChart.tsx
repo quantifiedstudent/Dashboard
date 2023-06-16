@@ -54,14 +54,12 @@ const options = (courseName: string) => ({
 
 interface CanvasOneCourseSubmissionsChartProps {
   data?: ChartData<"bar">;
-  courseId: number;
   startDate: Date;
   endDate: Date;
 }
 
 export default function CanvasOneCourseSubmissionsChart({
   data,
-  courseId,
   startDate,
   endDate,
 }: CanvasOneCourseSubmissionsChartProps) {
