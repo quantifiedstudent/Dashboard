@@ -9,7 +9,6 @@
 
 .charts .chart-container:hover{
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
 }
 
 .charts .chart-container__buttons{
