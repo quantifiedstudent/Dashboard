@@ -36,14 +36,20 @@
 }
 
 .chart {
-    height: calc(100% - 2rem);
+    /* height: calc(100% - 2rem); */
     width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .chart .chart__select {
-    height: 2rem;
-    width: 80%;
+    /* height: 2rem; */
+    width: 70%;
     background-color: var(--main1);
+    /* display: flex; */
+    /* justify-content: center; */
 }
 
 @media (max-width: 970px) {

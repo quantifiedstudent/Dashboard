@@ -141,8 +141,9 @@ export default function CanvasOneCourseSubmissionsChart({
     control: (provided: any) => ({
       ...provided,
       backgroundColor: "var(--main1)",
-      border: "1px solid var(--main2)",
       color: "var(--font-colour)",
+      border: "2px solid var(--main2)",
+      borderRadius: "0.5rem",
     }),
     option: (provided: any) => ({
       ...provided,
