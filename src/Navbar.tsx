@@ -1,7 +1,6 @@
 import TuneIcon from '@mui/icons-material/Tune';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import './css/navbar.css'
 
