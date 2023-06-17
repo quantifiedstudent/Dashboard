@@ -1,4 +1,4 @@
-.charts .chart-container{
+.charts .chart-container {
     min-height: 20rem;
     min-width: 30rem;
     position: relative;
@@ -7,18 +7,18 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.charts .chart-container:hover{
+.charts .chart-container:hover {
     transform: scale(1.05);
 }
 
-.charts .chart-container__buttons{
+.charts .chart-container__buttons {
     position: absolute;
     top: 1rem;
     right: 2rem;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.chart-container__buttons div{
+.chart-container__buttons div {
     aspect-ratio: 1;
     display: flex;
     align-items: center;
@@ -30,17 +30,25 @@
     background-color: var(--main2);
 }
 
-.chart-container__buttons div:hover{
+.chart-container__buttons div:hover {
     transform: scale(1.05);
     /* box-shadow: 0 0 20px rgba(82, 41, 95, 0.502); */
 }
-.chart{
+
+.chart {
     height: calc(100% - 2rem);
     width: 100%;
 }
 
-.chart .chart__select{
+.chart .chart__select {
     height: 2rem;
     width: 80%;
     background-color: var(--main1);
+}
+
+@media (max-width: 970px) {
+    .charts .chart-container {
+        min-height: 15rem;
+        min-width: 25rem;
+    }
 }

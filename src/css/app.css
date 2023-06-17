@@ -1,4 +1,4 @@
-.charts{
+.charts {
   height: 100%;
   padding: 2rem;
   display: grid;
@@ -6,4 +6,11 @@
   grid-template-rows: repeat(auto-fit, 20rem);
   grid-gap: 1.5rem;
   grid-auto-flow: dense;
+}
+
+@media (max-width: 970px) {
+  .charts {
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-rows: repeat(auto-fit, 15rem);
+  }
 }
