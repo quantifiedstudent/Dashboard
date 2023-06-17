@@ -16,6 +16,7 @@ import IGraphCanvasCourseSubmissions, {
 import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
 import Select, { ActionMeta, SingleValue } from "react-select";
+import Colours from "../css/Colours";
 
 ChartJS.register(
   CategoryScale,
@@ -48,6 +49,19 @@ const options = (courseName: string) => ({
     title: {
       display: true,
       text: `Canvas Course "${courseName}" Submissions`,
+      color: Colours.fontColourDark,
+    },
+  },
+  scales: {
+    y: {
+      ticks: {
+        color: Colours.fontColourDark,
+      },
+    },
+    x: {
+      ticks: {
+        color: Colours.fontColourDark,
+      },
     },
   },
 });

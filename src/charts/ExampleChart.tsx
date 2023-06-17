@@ -11,6 +11,7 @@ import {
   ChartData,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Colours from "../css/Colours";
 
 ChartJS.register(
   CategoryScale,
@@ -53,6 +54,7 @@ export const options: ChartOptions<"line"> = {
     title: {
       display: true,
       text: "Chart.js Line Chart",
+      color: Colours.fontColourDark,
     },
   },
   scales: {
@@ -63,6 +65,10 @@ export const options: ChartOptions<"line"> = {
       title: {
         display: true,
         text: "Temperature",
+        color: Colours.fontColourDark,
+      },
+      ticks: {
+        color: Colours.fontColourDark,
       },
     },
     y1: {
@@ -71,6 +77,17 @@ export const options: ChartOptions<"line"> = {
       position: "right" as const,
       grid: {
         drawOnChartArea: false,
+      },
+      title: {
+        color: Colours.fontColourDark,
+      },
+      ticks: {
+        color: Colours.fontColourDark,
+      },
+    },
+    x: {
+      ticks: {
+        color: Colours.fontColourDark,
       },
     },
   },
