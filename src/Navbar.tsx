@@ -17,7 +17,8 @@ export default function Navbar({onPressClose, onPressOpen, onPressMore, openInFu
         <div id="navbar">
             <div id="navbar__section">
                 <div id="navbar__section__name">
-                    <h1>Quantified Student</h1>
+                    <h1 id="navbar__section__name__short">QS</h1>
+                    <h1 id="navbar__section__name__full">Quantified Student</h1>
                 </div>
                 <div id="navbar__section__separator">
                 </div>
