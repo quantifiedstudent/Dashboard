@@ -68,8 +68,8 @@ export default function App() {
     <>
       <Navbar onPressOpen={enableWindowPopup} />
       <div className="charts">
-        <ChartContainer onPressOpen={enableChartPopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-03-01')} endDate={new Date('2023-04-01')} /></ChartContainer>
-        <ChartContainer onPressOpen={enableChartPopup}><GradesWeatherChart /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><CanvasOneCourseSubmissionsChart startDate={new Date('2023-05-15')} endDate={new Date('2023-06-15')} courseId={13094} /></ChartContainer>
+        <ChartContainer onPressOpen={enableChartPopup}><GradesWeatherChart  startDate={new Date('2023-05-15')} endDate={new Date('2023-06-15')} courseId={13094} /></ChartContainer>
         <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
         <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>
         <ChartContainer onPressOpen={enableChartPopup}><ExampleChart /></ChartContainer>

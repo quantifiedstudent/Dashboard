@@ -7,14 +7,17 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions,
   ChartData,
+  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import GraphSubmissionsWithWeatherDTO from "../models/GraphSubmissionsWithWeather";
-import WeatherOfTheDay from "../models/GraphSubmissionsWithWeather";
-import SubmissionWithDate from "../models/GraphSubmissionsWithWeather";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import Course from "../models/ICourse";
+import { courseContext } from "../contexts/courseContext";
+import Select, { ActionMeta, SingleValue } from "react-select";
+import DatePickerChart from "../components/DatePicker";
+
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +49,7 @@ export const mockData = {
   ],
 };
 
-export const options: ChartOptions<"line"> = {
+const options = (courseName: string): ChartOptions<"line"> => ({
   responsive: true,
   aspectRatio: 2 | 3,
   maintainAspectRatio: false,
@@ -56,7 +59,7 @@ export const options: ChartOptions<"line"> = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: `Canvas Course "${courseName}`,
     },
   },
   scales: {
@@ -78,16 +81,38 @@ export const options: ChartOptions<"line"> = {
       },
     },
   },
-};
+});
 
-interface MyLineChartProps {
+
+
+interface GradesWeatherChartProps {
   data?: ChartData<"line">;
+  courseId: number;
+  startDate: Date;
+  endDate: Date;
 }
 
-export default function GradesWeatherChart({ data }: MyLineChartProps) {
+export default function GradesWeatherChart({ data, courseId, startDate, endDate }: GradesWeatherChartProps) {
+
+  const courses: Course[] = useContext(courseContext);
+
+  const [chartData, setChartData] = useState<ChartData<"line">>({
+    labels: [],
+    datasets: [],
+  });
+
+  const [selectedCourse, setSelectedCourse] = useState(courses[0]);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedCourse, startDate, endDate]);
+
   const fetchData = async () => {
+
+
+
     const result = await fetch(
-      "http://localhost:7003/graphSubmissionsWithWeather/course/13086?startDate=2023-05-01&endDate=2023-05-30"
+      `http://localhost:7003/graphSubmissionsWithWeather/course/${selectedCourse.id}?startDate=${startDate.toISOString().substring(0, 10)}&endDate=${endDate.toISOString().substring(0, 10)}`
     );
 
     const resultJson = await result.json();
@@ -95,26 +120,6 @@ export default function GradesWeatherChart({ data }: MyLineChartProps) {
 
     const labels = resultDTO.temperature.map((x) => x.date);
 
-    // function nrOfSubmissions(
-    //   resultDTO: GraphSubmissionsWithWeatherDTO
-    // ): number[] {
-    //   const list: number[] = [];
-    //   for (
-    //     let i = 0;
-    //     i < resultDTO.temperature.map((x) => x.date).length;
-    //     i++
-    //   ) {
-    //     if (
-    //       resultDTO.temperature.map((x) => x.date)[i] ==
-    //       resultDTO.submissions[i].date
-    //     ) {
-    //       list[i] = resultDTO.submissions.filter(
-    //         (x) => x.date == resultDTO.submissions[i].date
-    //       ).length;
-    //     }
-    //   }
-    //   return list;
-    // }
 
     const data: ChartData<"line"> = {
       labels,
@@ -138,14 +143,54 @@ export default function GradesWeatherChart({ data }: MyLineChartProps) {
     setChartData(data);
   };
 
-  const [chartData, setChartData] = useState<ChartData<"line">>({
-    labels: [],
-    datasets: [],
-  });
+  const courseName = selectedCourse ? selectedCourse.name : "";
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const handleSelectChange = (
+    newSelectedCourse: SingleValue<Course>,
+    actionMeta: ActionMeta<Course>
+  ) => {
+    setSelectedCourse(newSelectedCourse as Course);
+  };
 
-  return <Line data={chartData} options={options} />;
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      backgroundColor: "var(--main1)",
+      border: "1px solid var(--main2)",
+      color: "var(--font-colour)",
+    }),
+    option: (provided: any) => ({
+      ...provided,
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
+    }),
+    singleValue: (provided: any) => ({
+      ...provided,
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
+    }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      backgroundColor: "var(--main1)",
+      color: "var(--font-colour)",
+    }),
+  };
+
+  return(  
+  <div className="chart">
+  <DatePickerChart/>
+
+
+  <Select
+        options={courses}
+        defaultValue={selectedCourse}
+        getOptionValue={(option) => `${option.id}`}
+        getOptionLabel={(option) => `${option.name}`}
+        onChange={handleSelectChange}
+        className="chart__select"
+        styles={customStyles}
+  />
+  <Line options={options(courseName ? courseName : "")} data={chartData}  />;
+  </div>
+  )
 }
