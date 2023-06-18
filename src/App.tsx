@@ -10,6 +10,8 @@ import PopupWindow from "./PopupWindow";
 import StudentWindow from "./windows/StudentWindow";
 import TuneWindow from "./windows/TuneWindow";
 import ThemeHelper from "./ThemeHelper";
+import PeersWindow from "./windows/PeersWindow";
+import NotificationsWindow from "./windows/NotificationsWindow";
 
 export default function App() {
   ThemeHelper();
@@ -44,11 +46,11 @@ export default function App() {
         setShowWindowPopup(true);
         break;
       case "peers":
-        setOpenedPopupWindow(<div></div>);
+        setOpenedPopupWindow(<PeersWindow/>);
         setShowWindowPopup(true);
         break;
       case "notifications":
-        setOpenedPopupWindow(<div></div>);
+        setOpenedPopupWindow(<NotificationsWindow/>);
         setShowWindowPopup(true);
         break;
       case "student":

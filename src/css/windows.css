@@ -1,8 +1,15 @@
 /* STUDNET WINDOW */
 .student__window{
+    min-width: 10rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-direction: column;
+}
+.student__window div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 
