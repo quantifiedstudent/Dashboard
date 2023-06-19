@@ -13,18 +13,22 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.3",
+    "@mui/material": "^5.13.5",
     "@types/react-color": "^3.0.6",
     "@types/react-select": "^5.0.1",
+    "@types/styled-components": "^5.1.26",
     "chart.js": "^4.3.0",
+    "date-fns": "^2.30.0",
     "dayjs": "^1.11.8",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-color": "^2.19.3",
-    "react-datepicker": "^4.13.0",
+    "react-datepicker": "^4.14.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
     "react-multi-date-picker": "^4.1.2",
     "react-select": "^5.7.3",
+    "styled-components": "^5.3.11",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
@@ -39,7 +43,6 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }
 }

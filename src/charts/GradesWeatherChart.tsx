@@ -16,8 +16,7 @@ import { useEffect, useState, useContext } from "react";
 import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
 import Select, { ActionMeta, SingleValue } from "react-select";
-import DatePickerChart from "../components/DatePicker";
-
+import DateRangePicker from "../components/DatePickerComponent";
 
 ChartJS.register(
   CategoryScale,
@@ -51,8 +50,7 @@ export const mockData = {
 
 const options = (courseName: string): ChartOptions<"line"> => ({
   responsive: true,
-  aspectRatio: 2 | 3,
-  maintainAspectRatio: false,
+  maintainAspectRatio: true,
   plugins: {
     legend: {
       position: "top" as const,
@@ -83,17 +81,11 @@ const options = (courseName: string): ChartOptions<"line"> => ({
   },
 });
 
-
-
 interface GradesWeatherChartProps {
   data?: ChartData<"line">;
-  courseId: number;
-  startDate: Date;
-  endDate: Date;
 }
 
-export default function GradesWeatherChart({ data, courseId, startDate, endDate }: GradesWeatherChartProps) {
-
+export default function GradesWeatherChart({ data }: GradesWeatherChartProps) {
   const courses: Course[] = useContext(courseContext);
 
   const [chartData, setChartData] = useState<ChartData<"line">>({
@@ -101,25 +93,33 @@ export default function GradesWeatherChart({ data, courseId, startDate, endDate 
     datasets: [],
   });
 
+  const [selectedStartDate, setSelectedStartDate] = useState<Date>(new Date());
+  const [selectedEndDate, setSelectedEndDate] = useState<Date>(new Date());
+
+  const handleDateChange = (startDate: Date, endDate: Date) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+    console.log("Selected Start Date:", startDate);
+    console.log("Selected End Date:", endDate);
+  };
+
   const [selectedCourse, setSelectedCourse] = useState(courses[0]);
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedCourse, startDate, endDate]);
-
   const fetchData = async () => {
-
-
-
     const result = await fetch(
-      `http://localhost:7003/graphSubmissionsWithWeather/course/${selectedCourse.id}?startDate=${startDate.toISOString().substring(0, 10)}&endDate=${endDate.toISOString().substring(0, 10)}`
+      `http://localhost:7003/graphSubmissionsWithWeather/course/${
+        selectedCourse.id
+      }?startDate=${selectedStartDate
+        .toISOString()
+        .substring(0, 10)}&endDate=${selectedEndDate
+        .toISOString()
+        .substring(0, 10)}`
     );
 
     const resultJson = await result.json();
     const resultDTO: GraphSubmissionsWithWeatherDTO = resultJson;
 
     const labels = resultDTO.temperature.map((x) => x.date);
-
 
     const data: ChartData<"line"> = {
       labels,
@@ -141,6 +141,15 @@ export default function GradesWeatherChart({ data, courseId, startDate, endDate 
       ],
     };
     setChartData(data);
+    console.log(
+      `http://localhost:7003/graphSubmissionsWithWeather/course/${
+        selectedCourse.id
+      }?startDate=${selectedStartDate
+        .toISOString()
+        .substring(0, 10)}&endDate=${selectedEndDate
+        .toISOString()
+        .substring(0, 10)}`
+    );
   };
 
   const courseName = selectedCourse ? selectedCourse.name : "";
@@ -150,6 +159,7 @@ export default function GradesWeatherChart({ data, courseId, startDate, endDate 
     actionMeta: ActionMeta<Course>
   ) => {
     setSelectedCourse(newSelectedCourse as Course);
+    console.log("Selected End Date:", newSelectedCourse);
   };
 
   const customStyles = {
@@ -176,12 +186,14 @@ export default function GradesWeatherChart({ data, courseId, startDate, endDate 
     }),
   };
 
-  return(  
-  <div className="chart">
-  <DatePickerChart/>
+  useEffect(() => {
+    fetchData();
+  }, [selectedCourse, selectedStartDate, selectedEndDate]);
 
-
-  <Select
+  return (
+    <div className="chart">
+      <DateRangePicker onDateChange={handleDateChange} />
+      <Select
         options={courses}
         defaultValue={selectedCourse}
         getOptionValue={(option) => `${option.id}`}
@@ -189,8 +201,8 @@ export default function GradesWeatherChart({ data, courseId, startDate, endDate 
         onChange={handleSelectChange}
         className="chart__select"
         styles={customStyles}
-  />
-  <Line options={options(courseName ? courseName : "")} data={chartData}  />;
-  </div>
-  )
+      />
+      <Line options={options(courseName ? courseName : "")} data={chartData} />
+    </div>
+  );
 }
