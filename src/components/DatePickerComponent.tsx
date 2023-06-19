@@ -47,8 +47,14 @@ type DateRangePickerProps = {
 };
 
 const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateChange }) => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
+  const currentDate = new Date();
+  const lastMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    1
+  );
+  const [startDate, setStartDate] = useState<Date>(lastMonth);
+  const [endDate, setEndDate] = useState<Date>(currentDate);
   const [startDateError, setStartDateError] = useState<string>("");
   const [endDateError, setEndDateError] = useState<string>("");
 
@@ -56,7 +62,17 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateChange }) => {
     if (date && date.getTime() >= halfAYearAgo.getTime()) {
       setStartDate(date);
       setStartDateError("");
-      onDateChange(startDate, date);
+      if (endDateError) {
+        setEndDateError("");
+      }
+      if (
+        endDate &&
+        Math.abs(endDate.getTime() - date.getTime()) <= 30 * 24 * 60 * 60 * 1000
+      ) {
+        onDateChange(date, endDate);
+      } else {
+        setEndDateError("End date should be within 30 days of the start date.");
+      }
     } else {
       setStartDateError("Start date should be within the last 6 months.");
     }
@@ -70,9 +86,16 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateChange }) => {
     ) {
       setEndDate(date);
       setEndDateError("");
+      if (startDateError) {
+        setStartDateError("");
+      }
       onDateChange(startDate, date);
-    } else {
+    } else if (date) {
       setEndDateError("End date should be within 30 days of the start date.");
+    } else {
+      setEndDate(date);
+      setEndDateError("");
+      onDateChange(startDate, date);
     }
   };
 

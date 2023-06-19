@@ -93,14 +93,18 @@ export default function GradesWeatherChart({ data }: GradesWeatherChartProps) {
     datasets: [],
   });
 
-  const [selectedStartDate, setSelectedStartDate] = useState<Date>(new Date());
-  const [selectedEndDate, setSelectedEndDate] = useState<Date>(new Date());
+  const currentDate = new Date();
+  const lastMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    1
+  );
+  const [selectedStartDate, setSelectedStartDate] = useState<Date>(lastMonth);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date>(currentDate);
 
   const handleDateChange = (startDate: Date, endDate: Date) => {
     setSelectedStartDate(startDate);
     setSelectedEndDate(endDate);
-    console.log("Selected Start Date:", startDate);
-    console.log("Selected End Date:", endDate);
   };
 
   const [selectedCourse, setSelectedCourse] = useState(courses[0]);
@@ -141,6 +145,7 @@ export default function GradesWeatherChart({ data }: GradesWeatherChartProps) {
       ],
     };
     setChartData(data);
+
     console.log(
       `http://localhost:7003/graphSubmissionsWithWeather/course/${
         selectedCourse.id

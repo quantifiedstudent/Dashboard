@@ -12,7 +12,7 @@ import TuneWindow from "./windows/TuneWindow";
 import ThemeHelper from "./ThemeHelper";
 import PeersWindow from "./windows/PeersWindow";
 import NotificationsWindow from "./windows/NotificationsWindow";
-
+import MixedChart from "./charts/Mixedchart";
 export default function App() {
   ThemeHelper();
 
