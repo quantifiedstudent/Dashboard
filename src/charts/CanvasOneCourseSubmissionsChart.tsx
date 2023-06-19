@@ -17,6 +17,7 @@ import Course from "../models/ICourse";
 import { courseContext } from "../contexts/courseContext";
 import Select, { ActionMeta, SingleValue } from "react-select";
 import Colours from "../css/Colours";
+import DateRangePicker from "../components/DatePickerComponent";
 
 ChartJS.register(
   CategoryScale,
@@ -79,6 +80,20 @@ export default function CanvasOneCourseSubmissionsChart({
 }: CanvasOneCourseSubmissionsChartProps) {
   const courses: Course[] = useContext(courseContext);
 
+  const currentDate = new Date();
+  const lastMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    1
+  );
+  const [selectedStartDate, setSelectedStartDate] = useState<Date>(lastMonth);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date>(currentDate);
+
+  const handleDateChange = (startDate: Date, endDate: Date) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
+
   const [chartData, setChartData] = useState<ChartData<"bar">>({
     labels: [],
     datasets: [],
@@ -87,15 +102,15 @@ export default function CanvasOneCourseSubmissionsChart({
 
   useEffect(() => {
     fetchData();
-  }, [selectedCourse]);
+  }, [selectedCourse, selectedStartDate, selectedEndDate]);
 
   //   async function fetchData(){
   const fetchData = async () => {
     const dates: Date[] = [];
     const labels: string[] = [];
 
-    let currentDate = structuredClone(startDate);
-    while (currentDate <= endDate) {
+    let currentDate = structuredClone(selectedStartDate);
+    while (currentDate <= selectedEndDate) {
       dates.push(new Date(currentDate));
       labels.push(currentDate.toISOString().split("T")[0]);
       currentDate.setDate(currentDate.getDate() + 1);
@@ -178,6 +193,7 @@ export default function CanvasOneCourseSubmissionsChart({
 
   return (
     <div className="chart">
+      <DateRangePicker onDateChange={handleDateChange} />
       <Select
         options={courses}
         defaultValue={selectedCourse}

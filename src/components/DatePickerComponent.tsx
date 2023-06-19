@@ -82,7 +82,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateChange }) => {
     if (
       date &&
       startDate &&
-      Math.abs(date.getTime() - startDate.getTime()) <= 30 * 24 * 60 * 60 * 1000
+      Math.abs(date.getTime() - startDate.getTime()) <= 360 * 24 * 60 * 60 * 1000
     ) {
       setEndDate(date);
       setEndDateError("");
